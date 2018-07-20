@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Header';
-
+import Display from './Display';
+import OperatorButtons from './OperatorButtons';
+import NumberButtons from './NumberButtons';
 
 export default class CalculatorApp extends React.Component {
   constructor(props) {
@@ -35,12 +37,25 @@ export default class CalculatorApp extends React.Component {
 
   handleOperator(e) {
     let operator = e.target.value;
+    let firstItem = this.state.input[0];
     let lastItem = this.state.input[this.state.input.length - 1];
-    if (!lastItem.match(this.regexOperators)) {
+    let currentArrayLength = this.state.input.length;
+    let besginsWithMinus = /^\-/;
+    const addOperator = () => {
       this.setState(() => ({
         input: this.state.input.concat(operator),
         noDecimal: true
       }));
+    }
+    if (currentArrayLength === 1 && besginsWithMinus.test(firstItem)) {
+      addOperator();
+    }
+    if (currentArrayLength > 1 && this.regexOperators.test(lastItem)) {
+      this.state.input.pop();
+      addOperator();
+    }
+    if (!this.regexOperators.test(lastItem)) {
+      addOperator();
     }
   };
 
@@ -48,15 +63,24 @@ export default class CalculatorApp extends React.Component {
     let lastItem = this.state.input[this.state.input.length - 1];
     let secondToLastItem = this.state.input[this.state.input.length - 2];
     let currentArrayLength = this.state.input.length;
+    let firstResultItem = this.state.result[0];
     if (currentArrayLength === 1 && lastItem === '0') {
         return;
     }
     if (lastItem === '0' && secondToLastItem.match(this.regexOperators)) {
         return;
-    }
-    this.setState(() => ({
-      input: this.state.input.concat('0')
-    }));
+    } 
+    if (firstResultItem !== '' && currentArrayLength === 1) {
+      this.setState(() => ({
+        input: ['0'],
+        result: [''],
+        noDecimal: true
+      }));
+    } else {
+        this.setState(() => ({
+          input: this.state.input.concat('0')
+        }));
+      }
   }
 
   handleNumber(e) {
@@ -64,6 +88,9 @@ export default class CalculatorApp extends React.Component {
     let lastItem = this.state.input[this.state.input.length - 1];
     let secondToLastItem = this.state.input[this.state.input.length - 2];
     let currentArrayLength = this.state.input.length;
+    let firstResultItem = this.state.result[0];
+    console.log(firstResultItem);
+
     if (currentArrayLength === 1 && lastItem === '0') {
       this.state.input.pop();
     }
@@ -75,6 +102,14 @@ export default class CalculatorApp extends React.Component {
     this.setState(() => ({
       input: this.state.input.concat(inputNumber)
     }));
+
+    if (firstResultItem !== '' && currentArrayLength === 1) {
+      this.setState(() => ({
+        input: [inputNumber],
+        result: [''],
+        noDecimal: true
+      }));
+    }
   }
 
   result() {
@@ -85,7 +120,7 @@ export default class CalculatorApp extends React.Component {
     this.setState(() => {
       return (
         { 
-          result: [eval(this.state.input.join('')).toString()],
+          result: this.state.input.join('').toString() + " = " + eval(this.state.input.join('')).toString(),
           input: [eval(this.state.input.join('')).toString()],
           noDecimal: false
         }
@@ -110,28 +145,25 @@ export default class CalculatorApp extends React.Component {
     return (
       <div>
       <Header />
-        <div type="numbers">Result: {this.state.result}</div>
-        <div id="display" type="numbers">{this.state.input}</div>
+      <div>
+        <Display
+          result={this.state.result}
+          input={this.state.input}
+        />
+      </div>
         <div>
-          <button value=" + " onClick={this.handleOperator}>+</button>
-          <button value=" - " onClick={this.handleOperator}>-</button>
-          <button value=" * " onClick={this.handleOperator}>*</button>
-          <button value=" / " onClick={this.handleOperator}>/</button>
-          <button value="." id="decimal" onClick={this.handleDecimal}>.</button>
-          <button id="clear" onClick={this.clear}>C</button>
-          <button id="equals" onClick={this.result}>=</button>
+          <OperatorButtons
+            handleOperator={this.handleOperator}
+            clear={this.clear}
+            result={this.result}
+          />
         </div>
         <div>
-          <button id="zero" value="0" onClick={this.handleZero}>0</button>
-          <button id="one" value="1" onClick={this.handleNumber}>1</button>
-          <button id="two" value="2" onClick={this.handleNumber}>2</button>
-          <button id="three" value="3" onClick={this.handleNumber}>3</button>
-          <button id="four" value="4" onClick={this.handleNumber}>4</button>
-          <button id="five" value="5" onClick={this.handleNumber}>5</button>
-          <button id="six" value="6" onClick={this.handleNumber}>6</button>
-          <button id="seven" value="7" onClick={this.handleNumber}>7</button>
-          <button id="eight" value="8" onClick={this.handleNumber}>8</button>
-          <button id="nine" value="9" onClick={this.handleNumber}>9</button>
+          <NumberButtons
+            handleNumber={this.handleNumber}
+            handleZero={this.handleZero}
+            handleDecimal={this.handleDecimal}
+          />
         </div>
         <button onClick={this.logState.bind(this)}>logState</button>
       </div>
