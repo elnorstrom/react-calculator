@@ -1,0 +1,26 @@
+.header {
+  background: lightpink;
+  max-width: 70%;
+  margin: 0 auto;
+  border-radius: $border-radius;
+  padding: 5px;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+}
+
+.header__title {
+  font-size: 3.2rem;
+  margin-left: 2vw;
+  margin-bottom: 1vw;
+}
+
+.header__subtitle {
+  color: lightblue;
+  font-weight: 500;
+  margin-left: 2vw;
+  margin-top: 0;
+}
+
+@media (min-width: 700px) {
+  
+} 

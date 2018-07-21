@@ -144,26 +144,24 @@ export default class CalculatorApp extends React.Component {
   render() { 
     return (
       <div>
-      <Header />
-      <div>
-        <Display
-          result={this.state.result}
-          input={this.state.input}
-        />
-      </div>
-        <div>
-          <OperatorButtons
-            handleOperator={this.handleOperator}
-            clear={this.clear}
-            result={this.result}
-          />
-        </div>
-        <div>
-          <NumberButtons
-            handleNumber={this.handleNumber}
-            handleZero={this.handleZero}
-            handleDecimal={this.handleDecimal}
-          />
+        <Header />
+        <div className="calculator-app">
+          <div className="display-container">
+            <Display
+              result={this.state.result}
+              input={this.state.input}
+            />
+          </div>
+          <div>
+            <OperatorButtons
+              handleOperator={this.handleOperator}
+              clear={this.clear}
+              result={this.result}
+              handleNumber={this.handleNumber}
+              handleZero={this.handleZero}
+              handleDecimal={this.handleDecimal}
+            />
+          </div>
         </div>
         <button onClick={this.logState.bind(this)}>logState</button>
       </div>
