@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 const Display = (props) => (
-  <div>
-    <div type="numbers">Result: {props.result}</div>
-    <div id="display" type="numbers">{props.input}</div>
+  <div className="display">
+  <div className="display-result" type="numbers">&nbsp;{props.result}</div>
+    <div className="display-numbers" id="display" type="numbers">{props.input}</div>
   </div>
 );
 
