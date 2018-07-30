@@ -4,11 +4,14 @@
   "main": "index.js",
   "author": "Elias Norstrom",
   "license": "MIT",
+  "homepage": "https://elnorstrom.github.io/react-calculator/",
   "scripts": {
     "serve": "live-server /public/scripts/app.js",
     "build": "webpack",
     "dev-server": "webpack-dev-server",
-    "build-babel": "babel ./app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    "build-babel": "babel ./app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -b master -d build"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
