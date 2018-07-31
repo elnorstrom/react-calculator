@@ -1,0 +1,40 @@
+html {
+  animation: fade-in 500ms ease-in;
+}
+
+
+body {
+  font-family: Helvetica;
+  background: white;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+button {
+  padding: 3.2vw;
+  background: lightblue;
+  border-radius: $border-radius;
+  color: lightpink;
+  border-style: solid;
+  transition: all 0.7s ease 0s;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  box-shadow: 1px 1px 1px;
+  cursor: pointer;
+  transform: translateY(-1px);
+  color: black;
+  background: darken(lightblue, 20%);
+  color: darken(lightpink, 20%) ;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
