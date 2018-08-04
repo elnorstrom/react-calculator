@@ -182,7 +182,7 @@ var CalculatorApp = function (_React$Component) {
       if (lastIndex.match(this.regexOperators)) {
         this.state.input.pop();
       }
-      this.setState(function () {
+      this.setState(function (prevState) {
         return {
           result: _this6.state.input.join('').toString() + " = " + eval(_this6.state.input.join('')).toString(),
           input: [eval(_this6.state.input.join('')).toString()],
@@ -200,12 +200,6 @@ var CalculatorApp = function (_React$Component) {
           noDecimal: true
         };
       });
-    }
-  }, {
-    key: 'logState',
-    value: function logState() {
-      console.log(this.state.input);
-      console.log(this.state.result);
     }
   }, {
     key: 'render',
@@ -226,7 +220,7 @@ var CalculatorApp = function (_React$Component) {
             })
           ),
           _react2.default.createElement(
-            'div',
+            'main',
             null,
             _react2.default.createElement(_OperatorButtons2.default, {
               handleOperator: this.handleOperator,
@@ -238,11 +232,7 @@ var CalculatorApp = function (_React$Component) {
             })
           )
         ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.logState.bind(this) },
-          'logState'
-        )
+        _react2.default.createElement('div', { className: 'footer' })
       );
     }
   }]);

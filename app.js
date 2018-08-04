@@ -19,5 +19,6 @@ require('./styles/styles.scss');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 console.log('heyhey');
+console.log('boooo!');
 
 _reactDom2.default.render(_react2.default.createElement(_CalculatorApp2.default, null), document.getElementById('app'));

@@ -69,7 +69,7 @@ var NumberButtons = function NumberButtons(props) {
     ),
     _react2.default.createElement(
       "button",
-      { className: "zero-button", id: "zero", value: "0", onClick: props.handleZero },
+      { id: "zero", value: "0", className: "zero-button", onClick: props.handleZero },
       "0"
     ),
     _react2.default.createElement(

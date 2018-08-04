@@ -1,26 +1,43 @@
+
 .header {
-  background: lightpink;
-  max-width: 70%;
+  background: $header-color;
+  width: 95vw;
   margin: 0 auto;
-  border-radius: $border-radius;
-  padding: 5px;
+  border-radius: 0 0 30px 30px;
+  padding: 2px;
   margin-bottom: 2vh;
-  margin-top: 2vh;
+  word-break: break-all;
+  @media screen and (min-width: 420px) and (max-width: 580px) {
+    width: 80vw;
+  }
+  @media screen and (min-width: 580px) and (max-width: 768px) {
+    width: 70vw;
+  }
+  @media screen and (min-width: 768px) and (max-width: 900px) {
+    width: 60vw;
+  }
+  @media screen and (min-width: 900px) and (max-width: 1200px) {
+    width: 50vw;
+  }
+  @media screen and (min-width: 1200px) and (max-width: 1600px) {
+    width: 40vw;
+  }
+  @media screen and (min-width: 1600px) {
+    width: 30vw;
+  }
 }
 
 .header__title {
-  font-size: 3.2rem;
+  font-size: $font-size-s;
   margin-left: 2vw;
   margin-bottom: 1vw;
 }
 
 .header__subtitle {
-  color: lightblue;
+  font-size: $font-size-xs;
+  color: white;
   font-weight: 500;
   margin-left: 2vw;
   margin-top: 0;
 }
 
-@media (min-width: 700px) {
-  
-} 
