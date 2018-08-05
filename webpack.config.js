@@ -4,9 +4,9 @@ module.exports = {
   mode: 'development',
   entry: './src/app.js',
   output: {
-    path: path.join(__dirname, './public'),
+    path: path.join(__dirname, './dist/'),
     filename: 'bundle.js',
-    publicPath: '/public/'
+    publicPath: '/dist/'
   },
   module: {
     rules: [{
@@ -15,16 +15,15 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.s?css$/,
-      use: [
+      loader: [
         'style-loader',
         'css-loader',
         'sass-loader'
       ]
-    }]
+    }],
   },
   devServer: {
     contentBase: path.join(__dirname, './public'),
     publicPath: '/public/'
   },
-  devtool: 'cheap-module-eval-source-map'
 };

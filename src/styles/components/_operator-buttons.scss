@@ -4,6 +4,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-gap: $grid-gap;
+  height: 100%;
 }
 
 .operator-buttons__number-section {
@@ -16,5 +17,6 @@
 }
 
 .operator-buttons__result-button {
-  grid-row: 4/6;   
+  grid-row: 4/6;
+  border-radius: 0 0 45px 0;
 }
