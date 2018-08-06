@@ -1,40 +1,47 @@
-html {
-  animation: fade-in 500ms ease-in;
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
+html {
+  height: 100%;
+  width: 100%;
+  animation: fade-in 1.5s ease-in;
+  font-size: 16px;
+  background: $background-color;
+}
 
 body {
   font-family: Helvetica;
-  background: white;
-}
-
-h1 {
-  font-size: 2.2rem;
+  height: 100%;
 }
 
 button {
-  padding: 3.2vw;
-  background: lightblue;
+  padding: 0.2em;
+  background: $button-color;
   border-radius: $border-radius;
-  color: lightpink;
-  border-style: solid;
-  transition: all 0.7s ease 0s;
-}
-
-button:focus {
-  outline: 0;
+  color: $button-text-color;
+  border-style: none;
+  transition: all 0.3s ease 0s;
+  font-size: $font-size-m;
+  font-weight: 300;
 }
 
 button:hover {
-  box-shadow: 1px 1px 1px;
+  box-shadow: 1px 1px 10px #A5A5A5;
   cursor: pointer;
-  transform: translateY(-1px);
-  color: black;
-  background: darken(lightblue, 20%);
-  color: darken(lightpink, 20%) ;
+  transform: translateX(-1px);
+  background: darken($button-color, 20%);
+  color: lighten($button-text-color, 50%);
 }
 
-@keyframes fade-in {
-  0% { opacity: 0 }
-  100% { opacity: 1 }
+@media screen and (min-width: 420px) {
+  .footer {
+    height: 10px;
+  }
 }

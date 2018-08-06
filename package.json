@@ -4,11 +4,16 @@
   "main": "index.js",
   "author": "Elias Norstrom",
   "license": "MIT",
+  "homepage": "https://elnorstrom.github.io/react-calculator",
   "scripts": {
     "serve": "live-server /public/scripts/app.js",
-    "build": "webpack",
     "dev-server": "webpack-dev-server",
-    "build-babel": "babel ./app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    "build-babel": "babel ./app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d /dist",
+    "publish": "npm run build && npm run deploy"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -16,16 +21,20 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "css-loader": "1.0.0",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "live-server": "^1.2.0",
     "node-sass": "4.9.2",
     "normalize.css": "8.0.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
-    "sass-loader": "7.0.3",
-    "style-loader": "0.21.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "3.1.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.2.0"
   }
 }

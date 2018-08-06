@@ -74,7 +74,7 @@ export default class CalculatorApp extends React.Component {
       this.setState(() => ({
         input: ['0'],
         result: [''],
-        noDecimal: true
+        noDecimal: true,
       }));
     } else {
         this.setState(() => ({
@@ -100,7 +100,7 @@ export default class CalculatorApp extends React.Component {
       }
     }
     this.setState(() => ({
-      input: this.state.input.concat(inputNumber)
+      input: this.state.input.concat(inputNumber),
     }));
 
     if (firstResultItem !== '' && currentArrayLength === 1) {
@@ -136,24 +136,19 @@ export default class CalculatorApp extends React.Component {
     }));
   };
 
-  logState() {
-    console.log(this.state.input);
-    console.log(this.state.result);
-  };
-
   render() { 
     return (
       <div>
         <Header />
         <div className="calculator-app">
           <div className="display-container">
-            <Display
+            <Display  
               result={this.state.result}
               input={this.state.input}
             />
           </div>
-          <div>
-            <OperatorButtons
+          <main>
+            <OperatorButtons 
               handleOperator={this.handleOperator}
               clear={this.clear}
               result={this.result}
@@ -161,9 +156,9 @@ export default class CalculatorApp extends React.Component {
               handleZero={this.handleZero}
               handleDecimal={this.handleDecimal}
             />
-          </div>
+          </main>
         </div>
-        <button onClick={this.logState.bind(this)}>logState</button>
+        <div className="footer"></div>
       </div>
     );
   }

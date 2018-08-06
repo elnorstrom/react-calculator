@@ -13,7 +13,7 @@ const NumberButtons = (props) => (
     <button id="one" value="1" onClick={props.handleNumber}>1</button>
     <button id="two" value="2" onClick={props.handleNumber}>2</button>
     <button id="three" value="3" onClick={props.handleNumber}>3</button>
-    <button className="zero-button" id="zero" value="0" onClick={props.handleZero}>0</button>
+    <button id="zero" value="0" className="zero-button" onClick={props.handleZero}>0</button>
     <button value="." id="decimal" onClick={props.handleDecimal}>.</button>
   </div>
 );

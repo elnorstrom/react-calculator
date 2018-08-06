@@ -1,27 +1,28 @@
 
 .display {
-  background: lightgrey;
+  background: $display-color;
   display: grid;
   margin-bottom: 0.5vh;
   text-align: end;
-  border-radius: $border-radius;
+  border-radius: 45px 45px 0 0;
   padding: 8px;
-  font-size: 2rem;
+  font-size: $display-font-size;
   word-break: break-all;
-  min-height: 15vh;
   min-width: 0;
   max-width: inherit;
-  max-height: 15vh;
+  min-height: 22vh;
+  max-height: 22vh;
   overflow: auto;
   justify-content: flex-end;
   align-items: flex-end;
-
+}
+.display::-webkit-scrollbar {
+  height: 40px;
 }
 
 .display-result {
-  font-size: 1rem;
+  font-size: $result-font-size;
   min-width: 0;
-  animation: fade 6s ease-in-out 0s;
 }
 
 .display-numbers {
