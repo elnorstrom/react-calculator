@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Header from './Header';
 import Display from './Display';
 import OperatorButtons from './OperatorButtons';
-import NumberButtons from './NumberButtons';
 
 export default class CalculatorApp extends React.Component {
   constructor(props) {
@@ -161,5 +159,5 @@ export default class CalculatorApp extends React.Component {
         <div className="footer"></div>
       </div>
     );
-  }
-}
+  };
+};
