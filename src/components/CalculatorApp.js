@@ -49,8 +49,7 @@ export default class CalculatorApp extends React.Component {
       addOperator();
     }
     if (currentArrayLength > 1 && this.regexOperators.test(lastItem)) {
-      this.state.input.pop();
-      addOperator();
+      this.state.input.pop()
     }
     if (!this.regexOperators.test(lastItem)) {
       addOperator();
