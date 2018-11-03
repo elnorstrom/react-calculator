@@ -4,7 +4,6 @@ import CalculatorApp from '../../components/CalculatorApp';
 
 describe('handleOperator', () => {
   
-  
   const initialInputState = ['0'];
   const input = 'input';
   let wrapper, instance;
