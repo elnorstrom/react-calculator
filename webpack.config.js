@@ -6,8 +6,9 @@ module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, './src/app.js'),
   output: {
-    path: path.join(__dirname, './dist'),
+    path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [{
@@ -35,7 +36,7 @@ module.exports = {
   devServer: {
     inline: true,
     historyApiFallback: true,
-    contentBase: path.join(__dirname, './dist'),
+    contentBase: path.resolve(__dirname, './dist'),
     open: true,
     compress: true,
     hot: true,
