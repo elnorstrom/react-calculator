@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should render CalculatorApp correctly 1`] = `
+<div>
+  <Header />
+  <div
+    className="calculator-app"
+  >
+    <div
+      className="display-container"
+    >
+      <Display
+        input={
+          Array [
+            "0",
+          ]
+        }
+        result={
+          Array [
+            "",
+          ]
+        }
+      />
+    </div>
+    <main>
+      <OperatorButtons
+        clear={[Function]}
+        handleDecimal={[Function]}
+        handleNumber={[Function]}
+        handleOperator={[Function]}
+        handleZero={[Function]}
+        result={[Function]}
+      />
+    </main>
+  </div>
+  <div
+    className="footer"
+  />
+</div>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should render Header correctly 1`] = `
+<div
+  className="header"
+>
+  <h1
+    className="header__title"
+  >
+    Calculator
+  </h1>
+  <h2
+    className="header__subtitle"
+  >
+    Numbers...numbers...
+  </h2>
+</div>
+`;

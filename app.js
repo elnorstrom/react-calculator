@@ -1,24 +1,17 @@
-'use strict';
+"use strict";
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _reactDom = _interopRequireDefault(require("react-dom"));
 
-var _reactDom = require('react-dom');
+var _CalculatorApp = _interopRequireDefault(require("./components/CalculatorApp"));
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+require("normalize.css/normalize.css");
 
-var _CalculatorApp = require('./components/CalculatorApp');
+require("./styles/styles.scss");
 
-var _CalculatorApp2 = _interopRequireDefault(_CalculatorApp);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-require('normalize.css/normalize.css');
+_reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_CalculatorApp["default"], null), document.getElementById('app'));
 
-require('./styles/styles.scss');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-console.log('heyhey');
-console.log('boooo!');
-
-_reactDom2.default.render(_react2.default.createElement(_CalculatorApp2.default, null), document.getElementById('app'));
+module.hot.accept();

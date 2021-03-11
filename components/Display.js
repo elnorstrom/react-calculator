@@ -3,33 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _react = require("react");
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require("react-dom");
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Display = function Display(props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "display" },
-    _react2.default.createElement(
-      "div",
-      { className: "display-result", type: "numbers" },
-      "\xA0",
-      props.result
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "display-numbers", id: "display", type: "numbers" },
-      props.input
-    )
-  );
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "display"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "display-result",
+    type: "numbers"
+  }, "\xA0", props.result), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "display-numbers",
+    id: "display",
+    type: "numbers"
+  }, props.input));
 };
 
-exports.default = Display;
+var _default = Display;
+exports["default"] = _default;

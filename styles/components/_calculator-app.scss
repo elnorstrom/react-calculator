@@ -11,11 +11,9 @@
   justify-content: stretch;
   height: 100%;
   margin-bottom: 1vh;
-
   @media screen and (min-width: 420px) {
     margin-bottom: 20px;
   }
-
   @media screen and (min-width: 420px) and (max-width: 580px) {
     width: 80vw;
   }
