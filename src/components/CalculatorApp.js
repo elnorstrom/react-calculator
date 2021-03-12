@@ -2,161 +2,149 @@ import React from 'react';
 import Header from './Header';
 import Display from './Display';
 import OperatorButtons from './OperatorButtons';
+import { OPERATORS } from '../consts/operators';
 
 export default class CalculatorApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleOperator = this.handleOperator.bind(this);
-    this.handleZero = this.handleZero.bind(this);
-    this.handleNumber = this.handleNumber.bind(this);
-    this.handleDecimal = this.handleDecimal.bind(this);
-    this.result = this.result.bind(this);
-    this.clear = this.clear.bind(this);
-    this.regexOperators = /[\+\-\*\/]/g;
-    this.state = {
-      input: ['0'],
-      result: [''],
-      noDecimal: true
-    }
-  }
+    constructor(props) {
+        super(props);
+        this.handleOperator = this.handleOperator.bind(this);
+        this.setOperator = this.updateOperator.bind(this);
+        this.handleNumber = this.handleNumber.bind(this);
+        this.result = this.result.bind(this);
+        this.clear = this.clear.bind(this);
 
-  handleDecimal() {
-    let lastItemAsNumber = Number(this.state.input[this.state.input.length - 1]);
-    let decimal = (Number.isNaN(lastItemAsNumber)) ? '0.' : '.';
-    this.setState(() => {
-      if (this.state.noDecimal) {
-        return ({ 
-          input: this.state.input.concat(decimal),
-          noDecimal: false
-        })
-      }
-    });
-  };
+        this.state = {
+            currentNumber: '',
+            previousNumber: '',
+            operator: undefined,
+        };
+    }
 
-  handleOperator(e) {
-    let operator = e.target.value;
-    let firstItem = this.state.input[0];
-    let lastItem = this.state.input[this.state.input.length - 1];
-    let currentArrayLength = this.state.input.length;
-    let besginsWithMinus = /^\-/;
-    const addOperator = () => {
-      this.setState(() => ({
-        input: this.state.input.concat(operator),
-        noDecimal: true
-      }));
-    }
-    if (currentArrayLength === 1 && besginsWithMinus.test(firstItem)) {
-      addOperator();
-    }
-    if (currentArrayLength > 1 && this.regexOperators.test(lastItem)) {
-      this.state.input.pop()
-    }
-    if (!this.regexOperators.test(lastItem)) {
-      addOperator();
-    }
-  };
+    handleOperator(e) {
+        const operator = e.target.value;
 
-  handleZero() {
-    let lastItem = this.state.input[this.state.input.length - 1];
-    let secondToLastItem = this.state.input[this.state.input.length - 2];
-    let currentArrayLength = this.state.input.length;
-    let firstResultItem = this.state.result[0];
-    if (currentArrayLength === 1 && lastItem === '0') {
-        return;
-    }
-    if (lastItem === '0' && secondToLastItem.match(this.regexOperators)) {
-        return;
-    } 
-    if (firstResultItem !== '' && currentArrayLength === 1) {
-      this.setState(() => ({
-        input: ['0'],
-        result: [''],
-        noDecimal: true,
-      }));
-    } else {
-        this.setState(() => ({
-          input: this.state.input.concat('0')
-        }));
-      }
-  }
-
-  handleNumber(e) {
-    let inputNumber = e.target.value;
-    let lastItem = this.state.input[this.state.input.length - 1];
-    let secondToLastItem = this.state.input[this.state.input.length - 2];
-    let currentArrayLength = this.state.input.length;
-    let firstResultItem = this.state.result[0];
-    console.log(firstResultItem);
-
-    if (currentArrayLength === 1 && lastItem === '0') {
-      this.state.input.pop();
-    }
-    if (currentArrayLength > 1) {
-      if (lastItem === '0' && secondToLastItem.match(this.regexOperators)) {
-        this.state.input.pop();
-      }
-    }
-    this.setState(() => ({
-      input: this.state.input.concat(inputNumber),
-    }));
-
-    if (firstResultItem !== '' && currentArrayLength === 1) {
-      this.setState(() => ({
-        input: [inputNumber],
-        result: [''],
-        noDecimal: true
-      }));
-    }
-  }
-
-  result() {
-    let lastIndex = this.state.input[this.state.input.length - 1];
-    if (lastIndex.match(this.regexOperators)) {
-      this.state.input.pop();
-    }
-    this.setState(() => {
-      return (
-        { 
-          result: this.state.input.join('').toString() + " = " + eval(this.state.input.join('')).toString(),
-          input: [eval(this.state.input.join('')).toString()],
-          noDecimal: false
+        if (!this.state.currentNumber) {
+            return;
         }
-      )
-    });
-  }
 
-  clear() {
-    this.setState(() => ({
-      input: ['0'],
-      result: [''],
-      noDecimal: true
-    }));
-  };
+        if (this.state.previousNumber !== '') {
+            const result = this.calculate();
 
-  render() { 
-    return (
-      <div>
-        <Header />
-        <div className="calculator-app">
-          <div className="display-container">
-            <Display  
-              result={this.state.result}
-              input={this.state.input}
-            />
-          </div>
-          <main>
-            <OperatorButtons 
-              handleOperator={this.handleOperator}
-              clear={this.clear}
-              result={this.result}
-              handleNumber={this.handleNumber}
-              handleZero={this.handleZero}
-              handleDecimal={this.handleDecimal}
-            />
-          </main>
-        </div>
-        <div className="footer"></div>
-      </div>
-    );
-  };
-};
+            this.setState(
+                () => ({
+                    currentNumber: result,
+                    operator: undefined,
+                    previousNumber: '',
+                }),
+                () => {
+                    this.updateOperator(operator);
+                }
+            );
+        } else {
+            this.updateOperator(operator);
+        }
+    }
+
+    updateOperator(operator) {
+        this.setState(() => ({
+            operator,
+            previousNumber: this.state.currentNumber,
+            currentNumber: '',
+        }));
+    }
+
+    handleNumber(e) {
+        let inputNumber = e.target.value.toString();
+
+        if (inputNumber === '.') {
+            if (this.state.currentNumber.includes('.')) {
+                return;
+            }
+
+            if (!this.state.currentNumber) {
+                inputNumber = '0.';
+            }
+        }
+
+        if (inputNumber === '0' && this.state.currentNumber === '0') {
+            return;
+        }
+
+        this.setState(() => ({
+            currentNumber: this.state.currentNumber.toString() + inputNumber,
+        }));
+    }
+
+    result() {
+        const result = this.calculate();
+
+        this.setState(() => ({
+            currentNumber: result,
+            operator: undefined,
+            previousNumber: '',
+        }));
+    }
+
+    calculate() {
+        let result;
+        const previous = parseFloat(this.state.previousNumber);
+        const current = parseFloat(this.state.currentNumber);
+
+        if (isNaN(previous) || isNaN(current)) {
+            return;
+        }
+
+        switch (this.state.operator) {
+            case OPERATORS.ADD:
+                result = previous + current;
+                break;
+            case OPERATORS.SUBTRACT:
+                result = previous - current;
+                break;
+            case OPERATORS.MULTIPLY:
+                result = previous * current;
+                break;
+            case OPERATORS.DIVIDE:
+                result = previous / current;
+                break;
+            default:
+                return;
+        }
+
+        return result;
+    }
+
+    clear() {
+        this.setState(() => ({
+            currentNumber: '',
+            previousNumber: '',
+            operator: undefined,
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <Header />
+                <div className="calculator-app">
+                    <div className="display-container">
+                        <Display
+                            previous={this.state.previousNumber}
+                            current={this.state.currentNumber}
+                            operator={this.state.operator}
+                        />
+                    </div>
+                    <main>
+                        <OperatorButtons
+                            handleOperator={this.handleOperator}
+                            clear={this.clear}
+                            result={this.result}
+                            handleNumber={this.handleNumber}
+                        />
+                    </main>
+                </div>
+                <div className="footer"></div>
+            </div>
+        );
+    }
+}
