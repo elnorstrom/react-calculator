@@ -10,16 +10,8 @@ exports[`It should render CalculatorApp correctly 1`] = `
       className="display-container"
     >
       <Display
-        input={
-          Array [
-            "0",
-          ]
-        }
-        result={
-          Array [
-            "",
-          ]
-        }
+        current="0"
+        previous=""
       />
     </div>
     <main>
@@ -28,7 +20,6 @@ exports[`It should render CalculatorApp correctly 1`] = `
         handleDecimal={[Function]}
         handleNumber={[Function]}
         handleOperator={[Function]}
-        handleZero={[Function]}
         result={[Function]}
       />
     </main>

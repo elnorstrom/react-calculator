@@ -6,20 +6,14 @@ exports[`It should render input correctly 1`] = `
 >
   <div
     className="display-result"
-    type="numbers"
   >
      
+     
   </div>
   <div
     className="display-numbers"
     id="display"
-    type="numbers"
-  >
-    1
-    3
-    +
-    0
-  </div>
+  />
 </div>
 `;
 
@@ -29,15 +23,13 @@ exports[`It should render result correctly 1`] = `
 >
   <div
     className="display-result"
-    type="numbers"
   >
      
-    53424.00912
+     
   </div>
   <div
     className="display-numbers"
     id="display"
-    type="numbers"
   />
 </div>
 `;
@@ -48,14 +40,13 @@ exports[`It should render the empty Display correctly 1`] = `
 >
   <div
     className="display-result"
-    type="numbers"
   >
      
+     
   </div>
   <div
     className="display-numbers"
     id="display"
-    type="numbers"
   />
 </div>
 `;

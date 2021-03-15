@@ -4,3 +4,5 @@ export const OPERATORS = {
     DIVIDE: '/',
     MULTIPLY: '*',
 };
+
+export const DECIMAL = '.';

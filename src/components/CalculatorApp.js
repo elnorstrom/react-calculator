@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Display from './Display';
 import OperatorButtons from './OperatorButtons';
-import { OPERATORS } from '../consts/operators';
+import { OPERATORS, DECIMAL } from '../consts/operators';
 
 export default class CalculatorApp extends React.Component {
     constructor(props) {
@@ -10,11 +11,13 @@ export default class CalculatorApp extends React.Component {
         this.handleOperator = this.handleOperator.bind(this);
         this.setOperator = this.updateOperator.bind(this);
         this.handleNumber = this.handleNumber.bind(this);
+        this.handleDecimal = this.handleDecimal.bind(this);
+        this.updateCurrentNumber = this.updateCurrentNumber.bind(this);
         this.result = this.result.bind(this);
         this.clear = this.clear.bind(this);
 
         this.state = {
-            currentNumber: '',
+            currentNumber: '0',
             previousNumber: '',
             operator: undefined,
         };
@@ -23,6 +26,7 @@ export default class CalculatorApp extends React.Component {
     handleOperator(e) {
         const operator = e.target.value;
 
+        console.log(this.state.currentNumber);
         if (!this.state.currentNumber) {
             return;
         }
@@ -53,25 +57,38 @@ export default class CalculatorApp extends React.Component {
         }));
     }
 
-    handleNumber(e) {
-        let inputNumber = e.target.value.toString();
+    handleDecimal() {
+        let newNumber = DECIMAL;
 
-        if (inputNumber === '.') {
-            if (this.state.currentNumber.includes('.')) {
-                return;
-            }
-
-            if (!this.state.currentNumber) {
-                inputNumber = '0.';
-            }
-        }
-
-        if (inputNumber === '0' && this.state.currentNumber === '0') {
+        if (this.state.currentNumber.includes(DECIMAL)) {
             return;
         }
 
+        if (!this.state.currentNumber || this.state.currentNumber === '0') {
+            newNumber = '0.';
+        } else {
+            newNumber = this.state.currentNumber.toString() + newNumber;
+        }
+
+        this.updateCurrentNumber(newNumber);
+    }
+
+    handleNumber(e) {
+        let inputNumber = e.target.value.toString();
+        let newNumber = '';
+
+        if (this.state.currentNumber === '0') {
+            newNumber = inputNumber;
+        } else {
+            newNumber = this.state.currentNumber.toString() + inputNumber;
+        }
+
+        this.updateCurrentNumber(newNumber);
+    }
+
+    updateCurrentNumber(newNumber) {
         this.setState(() => ({
-            currentNumber: this.state.currentNumber.toString() + inputNumber,
+            currentNumber: newNumber,
         }));
     }
 
@@ -111,12 +128,12 @@ export default class CalculatorApp extends React.Component {
                 return;
         }
 
-        return result;
+        return parseFloat(result.toFixed(10)).toString();
     }
 
     clear() {
         this.setState(() => ({
-            currentNumber: '',
+            currentNumber: '0',
             previousNumber: '',
             operator: undefined,
         }));
@@ -124,9 +141,9 @@ export default class CalculatorApp extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="calculator-app">
                 <Header />
-                <div className="calculator-app">
+                <div className="calculator">
                     <div className="display-container">
                         <Display
                             previous={this.state.previousNumber}
@@ -140,6 +157,7 @@ export default class CalculatorApp extends React.Component {
                             clear={this.clear}
                             result={this.result}
                             handleNumber={this.handleNumber}
+                            handleDecimal={this.handleDecimal}
                         />
                     </main>
                 </div>
